@@ -1,25 +1,26 @@
-'use strict';
+"use strict";
 
 // load modules
-const express = require('express');
-const morgan = require('morgan');
+const express = require("express");
+const morgan = require("morgan");
+const routes = require("./routes/routes");
 
 const app = express();
 
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/course-api", { useNewUrlParser: true });
+mongoose.connection
+  .once("open", () => console.log("good to go!"))
+  .on("error", console.error.bind(console, "connection error:"));
+
 // set our port
-app.set('port', process.env.PORT || 5000);
+app.set("port", process.env.PORT || 5000);
 
 // morgan gives us http request logging
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
+app.use(routes);
 // TODO add additional routes here
-
-// send a friendly greeting for the root route
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to the Course Review API'
-  });
-});
 
 // uncomment this route in order to test the global error handler
 // app.get('/error', function (req, res) {
@@ -29,9 +30,9 @@ app.get('/', (req, res) => {
 // send 404 if no other route matched
 app.use((req, res) => {
   res.status(404).json({
-    message: 'Route Not Found'
-  })
-})
+    message: "Route Not Found"
+  });
+});
 
 // global error handler
 app.use((err, req, res, next) => {
@@ -43,6 +44,8 @@ app.use((err, req, res, next) => {
 });
 
 // start listening on our port
-const server = app.listen(app.get('port'), () => {
+const server = app.listen(app.get("port"), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
+
+module.exports = app;
