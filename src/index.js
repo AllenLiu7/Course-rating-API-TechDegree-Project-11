@@ -3,11 +3,13 @@
 // load modules
 const express = require("express");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 const routes = require("./routes/routes");
 
 const app = express();
 
 const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/course-api", { useNewUrlParser: true });
 mongoose.connection
   .once("open", () => console.log("good to go!"))
@@ -18,7 +20,7 @@ app.set("port", process.env.PORT || 5000);
 
 // morgan gives us http request logging
 app.use(morgan("dev"));
-
+app.use(bodyParser());
 app.use(routes);
 // TODO add additional routes here
 

@@ -1,7 +1,6 @@
 "use strict";
 
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const CoursesSchema = new Schema({
@@ -21,6 +20,12 @@ const CoursesSchema = new Schema({
   },
   estimatedTime: String,
   materialsNeeded: String,
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "reviews"
+    }
+  ],
   steps: [
     {
       stepNumber: Number,
@@ -31,13 +36,7 @@ const CoursesSchema = new Schema({
       description: {
         type: String,
         required: true
-      },
-      reviews: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "reviews"
-        }
-      ]
+      }
     }
   ]
 });
