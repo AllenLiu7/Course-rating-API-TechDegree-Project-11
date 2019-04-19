@@ -4,6 +4,7 @@ const UsersController = require("../controller/users_controller");
 const User = require("../models/users");
 const Course = require("../models/courses");
 const Review = require("../models/reviews");
+const mid = require("../../middleware");
 
 // router.param("courseId", function(req, res, next, id) {
 //   Course.findById(id, function(err, doc) {
@@ -25,7 +26,7 @@ router.get("/", (req, res) => {
 });
 
 //Returns the currently authenticated user
-router.get("/api/users", (req, res, next) => {
+router.get("/api/users", mid.authenticateUser, (req, res, next) => {
   User.find({})
     .then(users => {
       res.json(users);

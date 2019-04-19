@@ -5,9 +5,21 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const routes = require("./routes/routes");
+const session = require("express-session");
+const authenticateUser = require("../middleware");
 
 const app = express();
 
+//use session for tracking logins
+app.use(
+  session({
+    secret: "hi there",
+    resave: true,
+    saveUninitialized: false
+  })
+);
+
+//connect to mongodb, using mongoose
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/course-api", { useNewUrlParser: true });
