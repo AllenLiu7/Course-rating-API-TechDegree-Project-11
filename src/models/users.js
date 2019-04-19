@@ -12,7 +12,7 @@ const UserSchema = new Schema({
 
 //authenticate input against database documents
 UserSchema.statics.authenticate = function(email, password, callback) {
-  User.findOne.apply({ email: email }).exec(function(error, user) {
+  User.findOne({ emailAddress: email }).exec(function(error, user) {
     if (error) {
       return callback(error);
     } else if (!user) {
@@ -22,7 +22,7 @@ UserSchema.statics.authenticate = function(email, password, callback) {
     }
 
     bcrypt.compare(password, user.password, function(error, result) {
-      if (result === ture) {
+      if (result) {
         return callback(null, user);
       } else {
         return callback();
