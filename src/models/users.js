@@ -11,8 +11,8 @@ const UserSchema = new Schema({
 });
 
 //authenticate input against database documents
-UserSchema.statics.authenticate = function(email, password, callback) {
-  User.findOne({ emailAddress: email }).exec(function(error, user) {
+UserSchema.statics.authenticate = (email, password, callback) => {
+  User.findOne({ emailAddress: email }).exec((error, user) => {
     if (error) {
       return callback(error);
     } else if (!user) {
@@ -21,7 +21,7 @@ UserSchema.statics.authenticate = function(email, password, callback) {
       return callback(err);
     }
 
-    bcrypt.compare(password, user.password, function(error, result) {
+    bcrypt.compare(password, user.password, (error, result) => {
       if (result) {
         return callback(null, user);
       } else {
@@ -31,9 +31,9 @@ UserSchema.statics.authenticate = function(email, password, callback) {
   });
 };
 
-UserSchema.pre("save", function(next) {
+UserSchema.pre("save", next => {
   let user = this;
-  bcrypt.hash(user.password, 10, function(err, hash) {
+  bcrypt.hash(user.password, 10, (err, hash) => {
     if (err) {
       return next(err);
     }

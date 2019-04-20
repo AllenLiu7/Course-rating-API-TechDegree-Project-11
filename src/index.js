@@ -6,7 +6,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const routes = require("./routes/routes");
 const session = require("express-session");
-const authenticateUser = require("../middleware");
 
 const app = express();
 
@@ -30,16 +29,9 @@ mongoose.connection
 // set our port
 app.set("port", process.env.PORT || 5000);
 
-// morgan gives us http request logging
 app.use(morgan("dev"));
 app.use(bodyParser());
 app.use(routes);
-// TODO add additional routes here
-
-// uncomment this route in order to test the global error handler
-// app.get('/error', function (req, res) {
-//   throw new Error('Test error');
-// });
 
 // send 404 if no other route matched
 app.use((req, res) => {

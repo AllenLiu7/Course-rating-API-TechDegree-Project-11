@@ -6,12 +6,9 @@ const authenticateUser = (req, res, next) => {
   const credentials = auth(req);
 
   if (credentials) {
-    User.authenticate(credentials.name, credentials.pass, function(
-      error,
-      user
-    ) {
+    User.authenticate(credentials.name, credentials.pass, (error, user) => {
       if (error || !user) {
-        let err = new Error("Authentication fail");
+        let err = new Error("Authentication fails");
         err.status = 401;
         return next(err);
       } else {
