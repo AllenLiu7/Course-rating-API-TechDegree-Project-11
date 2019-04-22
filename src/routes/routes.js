@@ -33,7 +33,7 @@ router.post("/api/users", (req, res, next) => {
 //Returns the Course "_id" and "title" properties
 router.get("/api/courses", (req, res, next) => {
   Course.find({})
-    .select("_id, title, user")
+    .select("_id, title")
     .then(courses => res.json(courses))
     .catch(next);
 });
