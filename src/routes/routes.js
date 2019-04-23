@@ -13,17 +13,15 @@ router.get("/", (req, res) => {
 
 //Returns the currently authenticated user
 router.get("/api/users", mid.authenticateUser, (req, res, next) => {
-  User.find({})
-    .then(users => {
-      res.json(users);
-    })
-    .catch(next);
+  res.json(req.currentUser);
+  res.end();
 });
 
 //Creates a user, sets the Location header to "/", and returns no content
 router.post("/api/users", (req, res, next) => {
   User.create(req.body)
-    .then(user => {
+    .then(() => {
+      res.status(201);
       res.location("/");
       res.end();
     })
@@ -49,6 +47,8 @@ router.get("/api/courses/:courseId", (req, res, next) => {
 router.post("/api/courses", mid.authenticateUser, (req, res, next) => {
   Course.create(req.body)
     .then(() => {
+      res.status(201);
+      res.location("/");
       res.end();
     })
     .catch(next);
@@ -58,6 +58,7 @@ router.post("/api/courses", mid.authenticateUser, (req, res, next) => {
 router.put("/api/courses/:courseId", mid.authenticateUser, (req, res, next) => {
   Course.findByIdAndUpdate(req.params.courseId, req.body)
     .then(() => {
+      res.status(204);
       res.end();
     })
     .catch(next);
