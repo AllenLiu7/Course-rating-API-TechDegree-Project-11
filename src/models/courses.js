@@ -7,7 +7,7 @@ const CoursesSchema = new Schema({
   user: [
     {
       type: Schema.Types.ObjectId,
-      ref: "users"
+      ref: "User"
     }
   ],
   title: {
@@ -23,7 +23,7 @@ const CoursesSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: "reviews"
+      ref: "Review"
     }
   ],
   steps: [
@@ -41,5 +41,5 @@ const CoursesSchema = new Schema({
   ]
 });
 
-const Courses = mongoose.model("courses", CoursesSchema);
-module.exports = Courses;
+const Course = mongoose.model("Course", CoursesSchema);
+module.exports = Course;

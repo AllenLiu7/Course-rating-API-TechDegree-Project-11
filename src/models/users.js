@@ -5,8 +5,14 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
 const UserSchema = new Schema({
-  fullName: String,
-  emailAddress: String,
+  fullName: {
+    type: String,
+    required: true
+  },
+  emailAddress: {
+    type: String,
+    required: true
+  },
   password: String
 });
 
@@ -42,5 +48,5 @@ UserSchema.pre("save", function(next) {
   });
 });
 
-const User = mongoose.model("users", UserSchema);
+const User = mongoose.model("User", UserSchema);
 module.exports = User;

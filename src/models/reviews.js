@@ -7,7 +7,7 @@ const ReviewSchema = new Schema({
   user: [
     {
       type: Schema.Types.ObjectId,
-      ref: "users"
+      ref: "User"
     }
   ],
   postedOn: {
@@ -23,5 +23,5 @@ const ReviewSchema = new Schema({
   review: String
 });
 
-const Review = mongoose.model("reviews", ReviewSchema);
+const Review = mongoose.model("Review", ReviewSchema);
 module.exports = Review;
