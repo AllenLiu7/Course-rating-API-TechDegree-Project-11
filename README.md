@@ -26,12 +26,6 @@ Install the necessary dependencies with npm
 npm install
 ```
 
-Seed the database
-
-```
-npm run db:seed
-```
-
 Start it up
 
 ```

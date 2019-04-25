@@ -13,7 +13,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  password: String
+  password: {
+    type: String,
+    required: true
+  }
 });
 
 //authenticate input against database documents

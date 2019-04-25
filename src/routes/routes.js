@@ -24,7 +24,7 @@ router.post("/api/users", (req, res, next) => {
       err.status = 400;
       return next(err);
     }
-    res.status(204);
+    res.status(201);
     res.location("/");
     res.end();
   });
@@ -61,7 +61,7 @@ router.post("/api/courses", mid.authenticateUser, (req, res, next) => {
       err.status = 400;
       return next(err);
     }
-    res.status(204);
+    res.status(201);
     res.end();
   });
 });
@@ -106,7 +106,7 @@ router.post(
               err.status = 400;
               return next(err);
             }
-            res.status(204);
+            res.status(201);
             res.location("/");
             res.end();
           });
