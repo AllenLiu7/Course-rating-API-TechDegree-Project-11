@@ -1,4 +1,3 @@
-# TechDegree Project 11
 
 ## Course Rating API
 
@@ -17,8 +16,9 @@ git clone https://github.com/AllenLiu7/td-project-11.git
 Change into the project directory
 
 ```
-cd td-project-11
+cd Course-rating-API-TechDegree-Project-11
 ```
+
 
 Install the necessary dependencies with npm
 
@@ -35,3 +35,29 @@ npm start
 ## Usage
 
 Use Postman to send requests to this API to see how it works.
+
+The CourseAPI.postman_collection.json file is a collection of Postman requests that you can use to test and explore your REST API.
+
+Ensure that you have MongoDB installed.
+
+If you haven't already done so, open a Command Prompt (on Windows) or Terminal (on Mac OS X) instance and run the command mongod (or sudo mongod) to start the MongoDB daemon.
+
+Open a second Command Prompt (on Windows) or Terminal (on Mac OS X) instance.
+Browse to the seed-data folder located in the root of the project.
+Run the following commands:
+```
+mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
+mongoimport --db course-api --collection users --type=json --jsonArray --file users.json
+mongoimport --db course-api --collection reviews --type=json --jsonArray --file reviews.json
+```
+Create user by defining "fullName", "emailAddress", "password" and "comfirmPassword" in the body tag in Postman. For example
+```
+{
+    "fullName": "Allen",
+    "emailAddress": "allen@gmail.com",
+    "password": "123",
+    "confirmPassword": "123"
+}
+```
+
+When visiting routes with user validation, select Authorization tab in Postman and select Basic Auth. Enter your Username and password which just set up. These information will be sent along with the request for authentication.
