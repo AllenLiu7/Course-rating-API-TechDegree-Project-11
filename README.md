@@ -1,9 +1,9 @@
 
 ## Course Rating API
 
-This project is a REST API using MongoDB, Mongoose, Express.js and Node.js.
+This project is a REST API using MongoDB, Mongoose, Express.js and Node.js. 
 
-The API will provide a way for users to review educational courses: users can see a list of courses in a database; add courses to the database; and add reviews for a specific course.
+The API will provide a way for users to review educational courses, users can see a list of courses in a database; add courses to the database; and add reviews for a specific course. Postman is suggested to test this API.
 
 ## Installation
 
